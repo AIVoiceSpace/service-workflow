@@ -33,4 +33,4 @@ jobs:
         id: current-version
         run: |
           echo ${{ steps.semantic.outputs.release-version }}
-          echo "::set-output name=version::${{ steps.semantic.outputs.release-version }}"
+          echo "version=${{ steps.semantic.outputs.release-version }}" >> $GITHUB_OUTPUT
