@@ -14,7 +14,7 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN:  ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN:  ${{ secrets.GH_TOKEN }}
     outputs:
       version: ${{ steps.store-version.outputs.versionout }}
     steps:
@@ -26,6 +26,8 @@ jobs:
         run: npm install -g -D semantic-release @semantic-release/changelog @semantic-release/github
       - name: release
         run: npx semantic-release --debug
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       - name: find current version
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
