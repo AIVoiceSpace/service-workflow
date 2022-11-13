@@ -32,7 +32,7 @@ jobs:
       - name: Login to canister.io
         uses: docker/login-action@v1
         with:
-          registry: cloud.canister.io:5000
+          registry: ghcr.io
           username: ${{ secrets.canister-username }}
           password: ${{ secrets.canister-password }}
 
@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: cloud.canister.io:5000/${{ inputs.image-name }}
+          images: ghcr.io/${{ inputs.image-name }}
           #setting value manually, but could come from git tag
           tags: |
             type=ref,event=tag
@@ -60,6 +60,6 @@ jobs:
         with:
           push: true
           tags: |
-            cloud.canister.io:5000/${{ inputs.image-name }}:${{ inputs.version }}
+            ghcr.io/${{ inputs.image-name }}:${{ inputs.version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
