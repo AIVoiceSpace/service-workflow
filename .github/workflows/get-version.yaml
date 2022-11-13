@@ -22,17 +22,11 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 #          persist-credentials: false
-      - name: setup semantic-release
-        run: npm install -g -D semantic-release @semantic-release/changelog @semantic-release/github
-      - name: release
-        run: npx semantic-release --debug
+      - uses: codfish/semantic-release-action@v2
         env:
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
-      - name: find current version
-        uses: actions-ecosystem/action-get-latest-tag@v1
-        id: get-latest-tag
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: get current version tag
         id: store-version
         run: |
-          echo ${{ steps.get-latest-tag.outputs.tag }}
-          echo "::set-output name=versionout::${{ steps.get-latest-tag.outputs.tag }}"
+          echo $RELEASE_VERSION
+          echo "::set-output name=versionout::$RELEASE_VERSION"
