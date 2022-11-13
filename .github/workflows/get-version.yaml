@@ -23,6 +23,9 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 #          persist-credentials: false
       - uses: codfish/semantic-release-action@v2
+        with:
+          additional_packages: |
+            ['@semantic-release/changelog']
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: get current version tag
