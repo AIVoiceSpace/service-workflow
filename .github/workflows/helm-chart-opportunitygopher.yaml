@@ -23,10 +23,10 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           charts_dir: helm
-          charts_url: https://bullyrooks.github.io/helm-charts/
-          owner: bullyrooks
-          repository: helm-charts
-          branch: gh-charts
+          charts_url: https://opportunitygopher.github.io/og-charts/
+          owner: opportunitygopher
+          repository: og-charts
+          branch: gh-pages
           app_version: ${{ inputs.version }}
           chart_version: ${{ inputs.version }}
 
