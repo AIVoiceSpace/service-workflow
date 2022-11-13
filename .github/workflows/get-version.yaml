@@ -23,7 +23,8 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           persist-credentials: false # allow SR to commit https://github.com/semantic-release/semantic-release/discussions/2557
       - name: setup semantic-release
-        run: npm install -g semantic-release @semantic-release/changelog -D
+        run: npm install -g -D semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
+
       - name: release
         run: npx semantic-release
         env:
