@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 #          persist-credentials: false
-      - uses: codfish/semantic-release-action@v2
+      - uses: docker://ghcr.io/codfish/semantic-release-action:v2
         with:
           additional_packages: |
             ['@semantic-release/changelog']
@@ -31,5 +31,5 @@ jobs:
       - name: get current version tag
         id: get-version
         run: |
-          echo "$RELEASE_VERSION"
-          echo "::set-output name=version::$RELEASE_VERSION"
+          echo ${{ steps.semantic.outputs.release-version }}
+          echo "::set-output name=version::${{ steps.semantic.outputs.release-version }}"
