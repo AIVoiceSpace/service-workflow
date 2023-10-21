@@ -12,16 +12,20 @@ on:
         required: true
         description: "Name of this docker repository"
       AWS_REGION_ID:
+        type: string
         required: true
         description: "AWS region"
       AWS_ACCOUNT_ID:
+        type: string
         required: true
         description: "AWS account"
     secrets:
       AWS_ACCESS_KEY_ID:
+        type: string
         required: true
         description: "AWS Access Key ID for ECR"
       AWS_SECRET_ACCESS_KEY:
+        type: string
         required: true
         description: "AWS Secret Access Key for ECR"
 jobs:
