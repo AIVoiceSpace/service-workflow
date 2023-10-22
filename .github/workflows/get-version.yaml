@@ -15,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write #allow the job to write back to the repo for changelog
-    env:
-      GITHUB_TOKEN:  ${{ secrets.GH_TOKEN }}
+
     outputs:
       version: ${{ steps.current-version.outputs.version }}
     steps:
@@ -37,9 +36,9 @@ jobs:
 
       - name: Run semantic-release
         id: semantic
-        run: npx semantic-release --no-ci
+        run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: get current version tag
         id: current-version
