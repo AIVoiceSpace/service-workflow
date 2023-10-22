@@ -24,9 +24,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14' # or another version
+          node-version: '18' # or another version
 
       - name: Install semantic-release
         run: npm install semantic-release
