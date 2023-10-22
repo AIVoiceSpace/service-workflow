@@ -13,6 +13,8 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write #allow the job to write back to the repo for changelog
     env:
       GITHUB_TOKEN:  ${{ secrets.GH_TOKEN }}
     outputs:
