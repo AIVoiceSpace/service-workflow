@@ -23,16 +23,33 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: docker://ghcr.io/codfish/semantic-release-action:v2
-        id: semantic
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          additional_packages: |
-            ['@semantic-release/changelog']
+          node-version: '14' # or another version
+
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run semantic-release
+        id: semantic
+        run: npx semantic-release --no-ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: get current version tag
         id: current-version
         run: |
-          echo ${{ steps.semantic.outputs.release-version }}
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "LATEST_TAG=$LATEST_TAG"
           echo "version=${{ steps.semantic.outputs.release-version }}" >> $GITHUB_OUTPUT
