@@ -67,6 +67,5 @@ jobs:
           push: true
           tags: |
             ${{ inputs.AWS_ACCOUNT_ID }}.dkr.ecr.${{ inputs.AWS_REGION_ID }}.amazonaws.com/${{ inputs.image-name }}:${{ inputs.tag }}
-            ${{ (github.ref == 'refs/heads/main') && (inputs.AWS_ACCOUNT_ID + '.dkr.ecr.' + inputs.AWS_REGION_ID + '.amazonaws.com/' + inputs.image-name + ':latest') || '' }}
-          cache-from: type=local,src=/tmp/.buildx-cache
+            ${{ (github.ref == 'refs/heads/main') && join(inputs.AWS_ACCOUNT_ID, '.dkr.ecr.', inputs.AWS_REGION_ID, '.amazonaws.com/', inputs.image-name, ':latest') || '' }}          cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
