@@ -29,7 +29,9 @@ jobs:
           node-version: '18' # or another version
 
       - name: Install semantic-release
-        run: npm install semantic-release
+        run: |
+          npm install semantic-release
+          npm install @semantic-release/changelog@latest
 
       - name: Run semantic-release
         id: semantic
