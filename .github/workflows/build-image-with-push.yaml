@@ -67,4 +67,5 @@ jobs:
           push: true
           tags: |
             ${{ inputs.AWS_ACCOUNT_ID }}.dkr.ecr.${{ inputs.AWS_REGION_ID }}.amazonaws.com/${{ inputs.image-name }}:${{ inputs.tag }}
+          cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
