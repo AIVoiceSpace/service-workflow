@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # or another version
+          node-version: '20' # or another version
 
       - name: Install semantic-release
         run: |
